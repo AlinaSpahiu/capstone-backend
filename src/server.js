@@ -3,6 +3,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const listEndpoints = require("express-list-endpoints")
 
+
+const server = express();
+const port = process.env.PORT || 5002;
+
+server.use(express.json());
+server.use(cors());
+
 // Routes:
 const usersRouter = require('./routes/users');
 const roomsRouter = require('./routes/rooms')
