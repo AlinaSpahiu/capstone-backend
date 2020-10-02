@@ -12,6 +12,23 @@ roomsRouter.get('/', async( req, res, next) =>{
    }
 })
 
+// get only one Room:
+roomsRouter.get('/:id', async(req, res, next) =>{
+    try{
+        const room = await RoomsSchema.findById(req.params.id)
+        if(room) {res.send(room)}
+        else {
+            const error = new Error()
+            error.httpStatusCose = 404;
+            res.send("Resource not found!")
+            next(error)
+        }
+        console.log(room)
+    }catch(error){
+        next(error)
+    }
+})
+
 // post a room:
 roomsRouter.post("/", async( req, res, next) =>{
     try{
